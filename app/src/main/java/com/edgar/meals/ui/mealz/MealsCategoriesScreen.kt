@@ -1,6 +1,7 @@
 package com.edgar.meals.ui.mealz
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,7 +26,10 @@ import com.edgar.meals.ui.theme.MealsTheme
 fun MealsCategoriesScreen() {
     val viewModel: MealCategoriesViewModel = viewModel()
     val meals = viewModel.mealsState.value
-    LazyColumn(contentPadding = PaddingValues(16.dp)) {
+    LazyColumn(
+        contentPadding = PaddingValues(16.dp),
+        modifier = Modifier.background(MaterialTheme.colors.primaryVariant)
+    ) {
         items(meals) { meal ->
             MealCategory(meal)
         }
@@ -41,28 +46,30 @@ fun MealCategory(meal: MealResponse) {
             .fillMaxWidth()
             .padding(top = 16.dp)
     ) {
-        Row {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Image(
                 painter = rememberImagePainter(meal.imageUrl),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(88.dp)
+                    .size(width = 200.dp, height = 200.dp)
                     .padding(4.dp)
             )
-            Column(
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .padding(16.dp)
-            ) {
-                Text(
-                    text = meal.name,
-                    style = MaterialTheme.typography.h6
-                )
-            }
+            Text(
+                text = meal.name,
+                style = MaterialTheme.typography.h4
+            )
+            Text(
+                text = meal.description,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.body2,
+                modifier = Modifier.padding(5.dp)
+            )
         }
     }
-
-
 }
 
 @ExperimentalCoilApi
