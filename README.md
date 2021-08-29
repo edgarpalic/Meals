@@ -6,5 +6,4 @@ Just getting some meals info from the API on https://themealdb.com/ and then jus
 the app.
 
 ### Result
-
-![alt](https://i.imgur.com/YyzpbOa.gif)
+![alt](https://i.imgur.com/K72PZmT.gif)
